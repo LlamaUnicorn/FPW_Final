@@ -24,7 +24,7 @@ class Vehicle(models.Model):  # наследуемся от класса Model
     pass
 
 
-class Directory_vehicle_model(models.Model):  # наследуемся от класса Model
+class DirectoryVehicleModel(models.Model):  # наследуемся от класса Model
     # directory_vehicle_model = models.ForeignKey(Vehicle, on_delete = models.CASCADE)
     # directory_vehicle_model_title = models.CharField(max_length = 255)
     # directory_vehicle_model_description = models.TextField()
