@@ -21,7 +21,13 @@ class Vehicle(models.Model):  # наследуемся от класса Model
     # vehicle_options = models.CharField(max_length = 255)
     # vehicle_client = models.CharField(max_length = 255)
     # vehicle_service_provider = models.CharField(max_length = 255)
+    pass
 
+
+class Directory_vehicle_model(models.Model):  # наследуемся от класса Model
+    # directory_vehicle_model = models.ForeignKey(Vehicle, on_delete = models.CASCADE)
+    # directory_vehicle_model_title = models.CharField(max_length = 255)
+    # directory_vehicle_model_description = models.TextField()
     pass
 
 
