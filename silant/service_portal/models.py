@@ -27,7 +27,6 @@ class Vehicle(models.Model):
 
 class DirectoryVehicleModel(models.Model):
     directory_vehicle_model = models.CharField(max_length=255)
-    directory_vehicle_model_title = models.CharField(max_length = 255)
     directory_vehicle_model_description = models.TextField()
 
 
