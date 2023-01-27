@@ -54,13 +54,13 @@ class DirectoryServiceProvider(models.Model):
     directory_service_provider_description = models.TextField()
 
 
-class Service(models.Model):  # наследуемся от класса Model
+class Service(models.Model):
     service_id = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
-    # service_type = models.CharField(max_length = 255)
-    # service_date = models.CharField(max_length = 255)
-    # service_engine_hours = models.CharField(max_length = 255)
-    # service_order_number = models.CharField(max_length = 255)
-    # service_order_date = models.CharField(max_length = 255)
+    service_type = models.ForeignKey('DirectoryServiceType', on_delete=models.CASCADE)
+    service_date = models.DateTimeField()
+    service_engine_hours = models.IntegerField()
+    service_order_number = models.CharField(max_length = 255)
+    service_order_date = models.DateTimeField()
     # service_organization = models.CharField(max_length = 255)
     # service_vehicle = models.CharField(max_length = 255)
     # service_provider = models.CharField(max_length = 255)
