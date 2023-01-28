@@ -20,8 +20,13 @@ class Vehicle(models.Model):
     vehicle_end_user = models.CharField(max_length = 255)
     vehicle_shipping_address = models.CharField(max_length = 255)
     vehicle_options = models.CharField(max_length = 255)
-    vehicle_client = models.CharField(max_length = 255)
+    vehicle_client = models.ForeignKey('DirectoryClientsModel', on_delete=models.CASCADE)
     vehicle_service_provider = models.ForeignKey('DirectoryServiceProvider', on_delete=models.CASCADE)
+
+
+class DirectoryClientsModel(models.Model):
+    directory_clients_model = models.CharField(max_length=255)
+    directory_clients_model_description = models.TextField()
 
 
 class DirectoryVehicleModel(models.Model):
@@ -55,17 +60,13 @@ class DirectoryServiceProvider(models.Model):
 
 
 class Service(models.Model):
-    service_id = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     service_type = models.ForeignKey('DirectoryServiceType', on_delete=models.CASCADE)
     service_date = models.DateTimeField()
     service_engine_hours = models.IntegerField()
     service_order_number = models.CharField(max_length = 255)
     service_order_date = models.DateTimeField()
-    # service_organization = models.CharField(max_length = 255)
-    # service_vehicle = models.CharField(max_length = 255)
-    # service_provider = models.CharField(max_length = 255)
-
-    pass
+    service_provider = models.ForeignKey('DirectoryServiceProvider', on_delete=models.CASCADE)
+    service_vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
 
 
 class DirectoryServiceType(models.Model):
@@ -74,15 +75,23 @@ class DirectoryServiceType(models.Model):
     
 
 class Reclamation(models.Model):  # наследуемся от класса Model
-    # reclamation_date= models.CharField(max_length = 255)
-    # reclamation_engine_hours= models.CharField(max_length = 255)
-    # reclamation_malfunction= models.CharField(max_length = 255)
-    # reclamation_malfunction_description= models.CharField(max_length = 255)
-    # reclamation_repair_type= models.CharField(max_length = 255)
-    # reclamation_placement_parts= models.CharField(max_length = 255)
-    # reclamation_repair_date= models.CharField(max_length = 255)
-    # reclamation_idle_time= models.CharField(max_length = 255)
-    # reclamation_vehicle= models.CharField(max_length = 255)
-    # reclamation_service_provider= models.CharField(max_length = 255)
+    reclamation_date = models.DateTimeField()
+    reclamation_engine_hours = models.CharField(max_length=255)
+    reclamation_malfunction = models.ForeignKey('DirectoryMalfunctionType', on_delete=models.CASCADE)
+    reclamation_malfunction_description = models.CharField(max_length=255)
+    reclamation_repair_type = models.ForeignKey('DirectoryRepairType', on_delete=models.CASCADE)
+    reclamation_replacement_parts = models.CharField(max_length=255)
+    reclamation_repair_date = models.DateTimeField()
+    # reclamation_idle_time = models.CharField(max_length = 255)
+    reclamation_vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
+    reclamation_service_provider = models.ForeignKey('DirectoryServiceProvider', on_delete=models.CASCADE)
 
-    pass
+
+class DirectoryMalfunctionType(models.Model):
+    directory_malfunction_type = models.CharField(max_length=255)
+    directory_malfunction_type_description = models.TextField()
+
+
+class DirectoryRepairType(models.Model):
+    directory_repair_type = models.CharField(max_length=255)
+    directory_repair_type_description = models.TextField()
