@@ -1,7 +1,9 @@
 from django.contrib import admin
 
 from .models import Vehicle, DirectoryVehicleModel, DirectoryVehicleEngineModel, DirectoryVehicleLiveAxleModel
-from .models import DirectoryVehicleDeadAxleModel, DirectoryClientsModel, DirectoryVehicleTransmissionModel, DirectoryServiceProvider
+from .models import DirectoryVehicleDeadAxleModel, DirectoryClientsModel, DirectoryVehicleTransmissionModel, \
+    DirectoryServiceProvider
+
 
 class VehicleAdmin(admin.ModelAdmin):
     list_display = ('vehicle_serial_number', 'vehicle_model', 'vehicle_shipping_date')
