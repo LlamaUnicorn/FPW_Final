@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Электронная сервисная книжка "Мой Силант"</title>
+</head>
+<body>
+    <h1>Таблица с данными</h1>
+    {% for vehicle in vehicles %}
+    <div>
+        <h2>{{ vehicle.vehicle_serial_number}}</h2>
+        <p>{{ vehicle.vehicle_model}}</p>
+        <p>{{ vehicle.vehicle_shipping_date|date:"d.m.Y H:i:s" }}</p>
+    </div>
+    {% endfor %}
+</body>
+</html>
