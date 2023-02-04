@@ -1,0 +1,26 @@
+header h1 {
+    text-align: center;
+    color: red;
+}
+
+h1 {
+    text-align: center;
+}
+
+th {
+    padding: 10px;
+}
+td {
+    padding: 10px;
+}
+
+.row1 {
+    color: black;
+    background-color: darkgray;
+}
+
+.row2 {
+    color: darkblue;
+    background-color: lightgray;
+
+}
