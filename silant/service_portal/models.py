@@ -15,7 +15,7 @@ class Vehicle(models.Model):
     vehicle_live_axle_serial_number = models.CharField(max_length=255)
     vehicle_dead_axle_model = models.ForeignKey('DirectoryVehicleDeadAxleModel', on_delete=models.CASCADE)
     vehicle_dead_axle_serial_number = models.CharField(max_length=255)
-    vehicle_invoice = models.CharField(max_length=255)
+    vehicle_invoice = models.CharField(null=True, blank=True, max_length=255)
     vehicle_shipping_date = models.DateField()
     vehicle_end_user = models.CharField(max_length=255)
     vehicle_shipping_address = models.CharField(max_length=255)
