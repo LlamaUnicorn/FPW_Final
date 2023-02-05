@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import timedelta
 
 # Create your models here.
 
@@ -16,7 +16,7 @@ class Vehicle(models.Model):
     vehicle_dead_axle_model = models.ForeignKey('DirectoryVehicleDeadAxleModel', on_delete=models.CASCADE)
     vehicle_dead_axle_serial_number = models.CharField(max_length=255)
     vehicle_invoice = models.CharField(max_length=255)
-    vehicle_shipping_date = models.DateTimeField()
+    vehicle_shipping_date = models.DateField()
     vehicle_end_user = models.CharField(max_length=255)
     vehicle_shipping_address = models.CharField(max_length=255)
     vehicle_options = models.CharField(max_length=255)
@@ -90,37 +90,60 @@ class DirectoryServiceProvider(models.Model):
 
 class Service(models.Model):
     service_type = models.ForeignKey('DirectoryServiceType', on_delete=models.CASCADE)
-    service_date = models.DateTimeField()
+    service_date = models.DateField()
     service_engine_hours = models.IntegerField()
     service_order_number = models.CharField(max_length=255)
-    service_order_date = models.DateTimeField()
+    service_order_date = models.DateField()
     service_provider = models.ForeignKey('DirectoryServiceProvider', on_delete=models.CASCADE)
     service_vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = 'Services'
+        verbose_name = 'Service'
+        ordering = ['-service_date']
+
 
 class DirectoryServiceType(models.Model):
-    directory_service_provider = models.CharField(max_length=255)
-    directory_service_provider_description = models.TextField()
+    directory_service_type = models.CharField(max_length=255)
+    directory_service_type_description = models.TextField()
+
+    def __str__(self):
+        return self.directory_service_type
 
 
 class Reclamation(models.Model):  # наследуемся от класса Model
-    reclamation_date = models.DateTimeField()
+    reclamation_date = models.DateField()
     reclamation_engine_hours = models.CharField(max_length=255)
     reclamation_malfunction = models.ForeignKey('DirectoryMalfunctionType', on_delete=models.CASCADE)
     reclamation_malfunction_description = models.CharField(max_length=255)
     reclamation_repair_type = models.ForeignKey('DirectoryRepairType', on_delete=models.CASCADE)
     reclamation_replacement_parts = models.CharField(max_length=255)
-    reclamation_repair_date = models.DateTimeField()
-    # reclamation_idle_time = models.CharField(max_length = 255)
+    reclamation_repair_date = models.DateField()
+    reclamation_idle_time = models.DateField(blank=True, null=True)
     reclamation_vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     reclamation_service_provider = models.ForeignKey('DirectoryServiceProvider', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = 'Reclamations'
+        verbose_name = 'Reclamation'
+        ordering = ['-reclamation_date']
+
+    def save(self, *args, **kwargs):
+        self.reclamation_idle_time = self.reclamation_repair_date - self.reclamation_date
+        super().save(*args, **kwargs)
 
 
 class DirectoryMalfunctionType(models.Model):
     directory_malfunction_type = models.CharField(max_length=255)
     directory_malfunction_type_description = models.TextField()
 
+    def __str__(self):
+        return self.directory_malfunction_type
+
 
 class DirectoryRepairType(models.Model):
     directory_repair_type = models.CharField(max_length=255)
     directory_repair_type_description = models.TextField()
+
+    def __str__(self):
+        return self.directory_repair_type
