@@ -15,7 +15,7 @@
         <tr class="{% cycle 'row1' 'row2' %}">
             <td>{{ vehicle.vehicle_serial_number}}</td>
             <td>{{ vehicle.vehicle_model|truncatechars:12 }}</td>
-            <td>{{ vehicle.vehicle_shipping_date|date:"d.m.Y H:i:s" }}</td>
+            <td>{{ vehicle.vehicle_shipping_date|date:"d.m.Y" }}</td>
         </tr>
         {% endfor %}
     </tbody>

@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import timedelta
-
+from datetime import date
+import datetime
 # Create your models here.
 
 
@@ -27,6 +28,9 @@ class Vehicle(models.Model):
         verbose_name_plural = 'Vehicles'
         verbose_name = 'Vehicle'
         ordering = ['-vehicle_shipping_date']
+
+    def __str__(self):
+        return self.vehicle_serial_number
 
 
 class DirectoryClientsModel(models.Model):
@@ -111,7 +115,7 @@ class DirectoryServiceType(models.Model):
         return self.directory_service_type
 
 
-class Reclamation(models.Model):  # наследуемся от класса Model
+class Reclamation(models.Model):
     reclamation_date = models.DateField()
     reclamation_engine_hours = models.CharField(max_length=255)
     reclamation_malfunction = models.ForeignKey('DirectoryMalfunctionType', on_delete=models.CASCADE)
@@ -119,7 +123,7 @@ class Reclamation(models.Model):  # наследуемся от класса Mod
     reclamation_repair_type = models.ForeignKey('DirectoryRepairType', on_delete=models.CASCADE)
     reclamation_replacement_parts = models.CharField(max_length=255)
     reclamation_repair_date = models.DateField()
-    reclamation_idle_time = models.DateField(blank=True, null=True)
+    reclamation_idle_time = models.BigIntegerField(blank=True, null=True)
     reclamation_vehicle = models.ForeignKey('Vehicle', on_delete=models.CASCADE)
     reclamation_service_provider = models.ForeignKey('DirectoryServiceProvider', on_delete=models.CASCADE)
 
@@ -129,7 +133,8 @@ class Reclamation(models.Model):  # наследуемся от класса Mod
         ordering = ['-reclamation_date']
 
     def save(self, *args, **kwargs):
-        self.reclamation_idle_time = self.reclamation_repair_date - self.reclamation_date
+        # self.reclamation_idle_time = self.reclamation_repair_date - self.reclamation_date
+        self.reclamation_idle_time = (self.reclamation_repair_date - self.reclamation_date).days
         super().save(*args, **kwargs)
 
 
