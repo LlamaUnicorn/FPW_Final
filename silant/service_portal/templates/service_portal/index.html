@@ -1,4 +1,5 @@
 {% extends "layout/basic.html" %}
+{% load static %}
 
 {% block content %}
 <h1>Таблица с данными</h1>
@@ -27,7 +28,7 @@
         {% for vehicle in vehicles %}
         <tr class="{% cycle 'row1' 'row2' %}">
             <td>{{ vehicle.vehicle_serial_number }}</td>
-            <td>{{ vehicle.vehicle_model|truncatechars:12 }}</td>
+            <td><a href="{% url 'directory_vehicle_model_view' vehicle.pk %}">{{ vehicle.vehicle_model|truncatechars:12 }}</a></td>
             <td>{{ vehicle.vehicle_engine_model }}</td>
             <td>{{ vehicle.vehicle_engine_serial_number }}</td>
             <td>{{ vehicle.vehicle_transmission_model }}</td>

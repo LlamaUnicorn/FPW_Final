@@ -11,10 +11,12 @@ def index(request):
     return render(request, 'service_portal/index.html', {'vehicles': vehicles})
 
 
-def directory_vehicle_model_view(request):
-    vehicle_models = DirectoryVehicleModel.objects.all
+def directory_vehicle_model_view(request, pk):
+    vehicle_models = DirectoryVehicleModel.objects.filter(pk=pk)
     return render(request, 'service_portal/DirectoryVehicleModel.html', {'vehicle_models': vehicle_models})
-
+# def directory_vehicle_model_view(request):
+#     vehicle_models = DirectoryVehicleModel.objects.all
+#     return render(request, 'service_portal/DirectoryVehicleModel.html', {'vehicle_models': vehicle_models})
 
 
 class VehicleCreateView(CreateView):
