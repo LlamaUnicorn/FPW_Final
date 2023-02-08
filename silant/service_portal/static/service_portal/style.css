@@ -1,7 +1,23 @@
-header h1 {
-    text-align: center;
-    color: red;
+header {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
 }
+
+@media (max-width: 767px) {
+  header {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/*header h1 {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*    text-align: center;*/
+/*    color: red;*/
+/*}*/
 
 h1 {
     text-align: center;
