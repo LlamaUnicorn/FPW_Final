@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Модель управляемого моста</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for vehicle_dead_axle_model in vehicle_dead_axle_models %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ vehicle_dead_axle_model.directory_vehicle_dead_axle_model }}</td>
+      <td>{{ vehicle_dead_axle_model.directory_vehicle_dead_axle_model_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

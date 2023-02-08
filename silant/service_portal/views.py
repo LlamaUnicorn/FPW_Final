@@ -34,6 +34,21 @@ def directory_vehicle_live_axle_model_view(request, pk):
     return render(request, 'service_portal/DirectoryVehicleLiveAxleModel.html', {'vehicle_live_axle_models': vehicle_live_axle_models})
 
 
+def directory_vehicle_dead_axle_model_view(request, pk):
+    vehicle_dead_axle_models = DirectoryVehicleDeadAxleModel.objects.filter(pk=pk)
+    return render(request, 'service_portal/DirectoryVehicleDeadAxleModel.html', {'vehicle_dead_axle_models': vehicle_dead_axle_models})
+
+
+def directory_clients_model_view(request, pk):
+    vehicle_clients_models = DirectoryClientsModel.objects.filter(pk=pk)
+    return render(request, 'service_portal/DirectoryClientsModel.html', {'vehicle_clients_models': vehicle_clients_models})
+
+
+def directory_vehicle_service_provider_view(request, pk):
+    vehicle_service_providers = DirectoryServiceProvider.objects.filter(pk=pk)
+    return render(request, 'service_portal/DirectoryServiceProvider.html', {'vehicle_service_providers': vehicle_service_providers})
+
+
 class VehicleCreateView(CreateView):
     template_name = 'service_portal/create.html'
     form_class = VehicleForm
