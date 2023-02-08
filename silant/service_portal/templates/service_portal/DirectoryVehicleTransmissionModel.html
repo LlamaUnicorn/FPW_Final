@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Модель трансмиссии</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for vehicle_transmission_model in vehicle_transmission_models %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ vehicle_transmission_model.directory_vehicle_transmission_model }}</td>
+      <td>{{ vehicle_transmission_model.directory_vehicle_transmission_model_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

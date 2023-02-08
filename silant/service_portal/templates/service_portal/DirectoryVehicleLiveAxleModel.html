@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Модель ведущего моста</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for vehicle_live_axle_model in vehicle_live_axle_models %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ vehicle_live_axle_model.directory_vehicle_live_axle_model }}</td>
+      <td>{{ vehicle_live_axle_model.directory_vehicle_live_axle_model_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
