@@ -15,13 +15,15 @@
 
 </head>
 <body>
-    <header>
-        <h1>Электронная сервисная книжка "Мой Силант"</h1>
-    </header>
     <nav>
-      <a href="{% url 'index' %}">Главная</a>
-      <a href="{% url 'create' %}">Добавить запись</a>
+        <button><a href="{% url 'index' %}">Главная</a></button>
+        <button><a href="{% url 'create' %}">Добавить запись</a></button>
+        <button><a href="{% url 'login' %}">Авторизация</a></button>
+        <button> <a href="/logout/">Выйти</a></button>
     </nav>
+    <header>
+        <h3>Электронная сервисная книжка "Мой Силант"</h3>
+    </header>
     <section>
         {% block content %}
         {% endblock %}

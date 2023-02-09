@@ -47,3 +47,7 @@ td {
   display: flex;
   align-items: center;
 }
+
+button {
+    padding: 1px;
+}

@@ -1,14 +1,16 @@
 {% extends "layout/basic.html" %}
 {% load static %}
 {% load custom_filters %}
+
+{% block content %}
 <nav>
     <button><a href="{% url 'index' %}">Главная</a></button>
     <button><a href="{% url 'create' %}">Добавить запись</a></button>
-    <button><a href="{% url 'login' %}">Авторизация</a></button>
+    {{request.user.username}}
     <button> <a href="/logout/">Выйти</a></button>
+    auth index page
 </nav>
-{% block content %}
-{{request.user.username}}
+
 <h1>Таблица с данными</h1>
     <form method="get">
         {{ form.as_table }}

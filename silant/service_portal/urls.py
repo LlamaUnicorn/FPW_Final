@@ -19,6 +19,7 @@ urlpatterns = [
     path('vehicle-managers/<int:pk>/', VehicleManagersDetailView.as_view(), name='vehicle-managers-detail'),
     path('vehicle-service/<int:pk>/', VehicleServiceDetailView.as_view(), name='vehicle-service-detail'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('logout/', views.logout_view, name='logout'),
+    # path('auth_index/', AuthorizedIndexView.as_view(), name='auth_index')
 ]

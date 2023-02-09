@@ -5,6 +5,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
 from service_portal.permissions import IsManagerUser, IsServiceUser
 from service_portal.models import Vehicle
@@ -18,6 +19,8 @@ from .filters import VehicleFilter
 # def index(request):
 #     vehicles = Vehicle.objects.all
 #     return render(request, 'service_portal/index.html', {'vehicles': vehicles})
+
+# @login_required
 def index(request):
     form = VehicleFilterForm(request.GET)
     vehicles = Vehicle.objects.all()
@@ -111,6 +114,10 @@ class VehicleServiceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VehicleServiceSerializer
     permission_classes = [IsAuthenticated, IsServiceUser]
     template_name = 'service_portal/vehicle_service.html'
+
+
+# class AuthorizedIndexView(LoginRequiredMixin, TemplateView):
+#     template_name = 'service_portal/auth_index.html'
 
 
 def logout_view(request):
