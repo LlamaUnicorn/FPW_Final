@@ -3,13 +3,21 @@ from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
 
 from .models import *
-from .forms import VehicleForm
+from .forms import VehicleFilterForm
 from .filters import VehicleFilter
 
 
+# def index(request):
+#     vehicles = Vehicle.objects.all
+#     return render(request, 'service_portal/index.html', {'vehicles': vehicles})
 def index(request):
-    vehicles = Vehicle.objects.all
-    return render(request, 'service_portal/index.html', {'vehicles': vehicles})
+    form = VehicleFilterForm(request.GET)
+    vehicles = Vehicle.objects.all()
+    if form.is_valid():
+        vehicle_serial_number = form.cleaned_data['vehicle_serial_number']
+        if vehicle_serial_number:
+            vehicles = vehicles.filter(vehicle_serial_number__icontains=vehicle_serial_number)
+    return render(request, 'service_portal/index.html', {'vehicles': vehicles, 'form': form})
 
 
 def directory_vehicle_model_view(request, pk):
@@ -60,7 +68,7 @@ def directory_vehicle_service_provider_view(request, pk):
 
 class VehicleCreateView(CreateView):
     template_name = 'service_portal/create.html'
-    form_class = VehicleForm
+    form_class = VehicleFilterForm
     success_url = reverse_lazy('index')
 
     # def get_context_data(self, **kwargs):
@@ -68,24 +76,36 @@ class VehicleCreateView(CreateView):
     #     pass
 
 
-class VehicleList(ListView):
-    model = Vehicle
-    ordering = 'vehicle_shipping_date'
-    template_name = 'index.html'
-    context_object_name = 'vehicles'
+# class VehicleList(ListView):
+#     model = Vehicle
+#     ordering = 'vehicle_shipping_date'
+#     template_name = 'index.html'
+#     context_object_name = 'vehicles'
+#
+#     def get_queryset(self):
+#         queryset = super.get_queryset()
+#         self.filterset = VehicleFilter(self.request.GET, queryset)
+#         return self.filterset.qs
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['filterset'] = self.filterset
+#         return context
+#
+#
+# class VehicleDetail(DetailView):
+#     model = Vehicle
+#     template_name = 'index.html'
+#     context_object_name = 'vehicle'
 
-    def get_queryset(self):
-        queryset = super.get_queryset()
-        self.filterset = VehicleFilter(self.request.GET, queryset)
-        return self.filterset.qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filterset'] = self.filterset
-        return context
-
-
-class VehicleDetail(DetailView):
-    model = Vehicle
-    template_name = 'DirectoryVehicleModel.html'
-    context_object_name = 'vehicle'
+# def vehicle_list(request):
+#     form = VehicleFilterForm(request.GET)
+#     if form.is_valid():
+#         vehicle_serial_number = form.cleaned_data['vehicle_serial_number']
+#         if vehicle_serial_number:
+#             vehicles = Vehicle.objects.filter(vehicle_serial_number__exact=vehicle_serial_number)
+#         else:
+#             vehicles = Vehicle.objects.all()
+#     else:
+#         vehicles = Vehicle.objects.all()
+#     return render(request, 'vehicle_list.html', {'vehicles': vehicles, 'form': form})

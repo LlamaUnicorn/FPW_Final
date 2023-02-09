@@ -3,7 +3,9 @@ from .models import Vehicle
 
 
 class VehicleFilter(FilterSet):
-    vehicle_model = CharFilter(field_name='vehicle_model__directory_vehicle_model', lookup_expr='icontains')
+    # vehicle_serial_number = CharFilter(field_name='vehicle_model__directory_vehicle_model', lookup_expr='icontains')
     class Meta:
         model = Vehicle
-        fields = ['vehicle_model']
+        fields = {
+            'vehicle_serial_number': ['icontains'],
+        }

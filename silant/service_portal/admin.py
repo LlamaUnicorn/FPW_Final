@@ -6,9 +6,9 @@ from .models import DirectoryVehicleTransmissionModel, DirectoryVehicleLiveAxleM
 
 
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ('vehicle_serial_number', 'vehicle_model', 'vehicle_shipping_date')
-    list_display_links = ('vehicle_serial_number', 'vehicle_model')
-    search_fields = ('vehicle_serial_number', 'vehicle_model')
+    list_display = ('vehicle_serial_number', 'vehicle_serial_number', 'vehicle_shipping_date')
+    list_display_links = ('vehicle_serial_number', 'vehicle_serial_number')
+    search_fields = ('vehicle_serial_number', 'vehicle_serial_number')
 
 
 class ServiceAdmin(admin.ModelAdmin):
