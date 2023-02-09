@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vehicles (Service View)</title>
+</head>
+<body>
+  <h1>Vehicles (Service View)</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Зав. № машины</th>
+        <th>Зав. № двигателя</th>
+        <th>Зав. № трансмиссии</th>
+        <th>Дата отгрузки с завода</th>
+        <th>Комплектация (доп. опции)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vehicle in vehicles %}
+          <tr class="{% cycle 'row1' 'row2' %}">
+              <td>{{ vehicle.vehicle_serial_number }}</td>
+              <td>{{ vehicle.vehicle_engine_serial_number }}</td>
+              <td>{{ vehicle.vehicle_transmission_serial_number }}</td>
+              <td>{{ vehicle.vehicle_shipping_date|date:"d.m.Y" }}</td>
+              <td>{{ vehicle.vehicle_options }}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

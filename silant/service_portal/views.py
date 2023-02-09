@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView
 from django.urls import reverse_lazy
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+from service_portal.permissions import IsManagerUser, IsServiceUser
+from service_portal.models import Vehicle
+from service_portal.serializers.vehicle_serializer import VehicleSerializer, VehicleManagersSerializer, VehicleServiceSerializer
 
 from .models import *
 from .forms import VehicleFilterForm
@@ -76,6 +84,38 @@ class VehicleCreateView(CreateView):
     #     pass
 
 
+class VehicleDetailView(generics.RetrieveAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerializer
+
+
+class VehicleManagersDetailView(generics.RetrieveAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleManagersSerializer
+
+
+class VehicleServiceDetailView(generics.RetrieveAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleServiceSerializer
+
+
+class VehicleManagersView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleManagersSerializer
+    permission_classes = [IsAuthenticated, IsManagerUser]
+    template_name = 'service_portal/vehicle_managers.html'
+
+
+class VehicleServiceView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleServiceSerializer
+    permission_classes = [IsAuthenticated, IsServiceUser]
+    template_name = 'service_portal/vehicle_service.html'
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
 # class VehicleList(ListView):
 #     model = Vehicle
 #     ordering = 'vehicle_shipping_date'
