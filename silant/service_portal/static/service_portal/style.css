@@ -42,3 +42,8 @@ td {
     background-color: lightgray;
 
 }
+
+.input-group {
+  display: flex;
+  align-items: center;
+}

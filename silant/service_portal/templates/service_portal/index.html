@@ -4,16 +4,17 @@
 
 {% block content %}
 <h1>Таблица с данными</h1>
-<!--    <form action="" method="get">-->
-<!--    {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}-->
-<!--    {{ filterset.form.as_p }}-->
-<!--    {# Добавим кнопку отправки данных формы #}-->
-<!--    <input type="submit" value="Найти!" />-->
-<!--    </form>-->
     <form method="get">
-    {{ form.as_p }}
-    <button type="submit">Search</button>
+        {{ form.as_table }}
+        <button type="submit" class="btn btn-secondary">Найти</button>
     </form>
+<!--<form method="get">-->
+<!--  <div class="input-group">-->
+<!--    {{ filter.form.vehicle_serial_number }}-->
+<!--    <button type="submit" class="btn btn-primary">Search</button>-->
+<!--  </div>-->
+<!--</form>-->
+
 <table id="vehicles-table" class="display" style="width:100%">
     <thead>
         <tr>
