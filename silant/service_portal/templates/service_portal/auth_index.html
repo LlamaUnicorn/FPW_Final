@@ -2,15 +2,13 @@
 {% load static %}
 {% load custom_filters %}
 
+{% block nav %}
+<button><a href="{% url 'auth_index' %}">Главная</a></button>
+<button><a href="{% url 'create' %}">Добавить запись</a></button>
+{{request.user.username}}
+<button> <a href="/logout/">Выйти</a></button>
+{% endblock %}
 {% block content %}
-<nav>
-    <button><a href="{% url 'index' %}">Главная</a></button>
-    <button><a href="{% url 'create' %}">Добавить запись</a></button>
-    {{request.user.username}}
-    <button> <a href="/logout/">Выйти</a></button>
-    auth index page
-</nav>
-
 <h1>Таблица с данными</h1>
     <form method="get">
         {{ form.as_table }}

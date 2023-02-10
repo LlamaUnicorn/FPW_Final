@@ -6,6 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 from service_portal.permissions import IsManagerUser, IsServiceUser
 from service_portal.models import Vehicle
@@ -29,6 +31,20 @@ def index(request):
         if vehicle_serial_number:
             vehicles = vehicles.filter(vehicle_serial_number__icontains=vehicle_serial_number)
     return render(request, 'service_portal/index.html', {'vehicles': vehicles, 'form': form})
+
+
+@login_required
+def authorized_index_view(request):
+    form = VehicleFilterForm(request.GET)
+    vehicles = Vehicle.objects.all()
+    if form.is_valid():
+        vehicle_serial_number = form.cleaned_data['vehicle_serial_number']
+        if vehicle_serial_number:
+            vehicles = vehicles.filter(vehicle_serial_number__icontains=vehicle_serial_number)
+    return render(request, 'service_portal/auth_index.html', {'vehicles': vehicles, 'form': form})
+
+# class AuthorizedIndexView(LoginRequiredMixin, TemplateView):
+#     template_name = 'service_portal/auth_index.html'
 
 
 def directory_vehicle_model_view(request, pk):
@@ -116,8 +132,7 @@ class VehicleServiceView(generics.RetrieveUpdateDestroyAPIView):
     template_name = 'service_portal/vehicle_service.html'
 
 
-# class AuthorizedIndexView(LoginRequiredMixin, TemplateView):
-#     template_name = 'service_portal/auth_index.html'
+
 
 
 def logout_view(request):
