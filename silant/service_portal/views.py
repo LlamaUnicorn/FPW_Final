@@ -96,7 +96,7 @@ def directory_vehicle_service_provider_view(request, pk):
 class VehicleCreateView(CreateView):
     template_name = 'service_portal/create.html'
     form_class = VehicleFilterForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('auth_index')
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -130,9 +130,6 @@ class VehicleServiceView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VehicleServiceSerializer
     permission_classes = [IsAuthenticated, IsServiceUser]
     template_name = 'service_portal/vehicle_service.html'
-
-
-
 
 
 def logout_view(request):
