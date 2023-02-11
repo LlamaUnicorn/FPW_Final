@@ -47,6 +47,24 @@ def authorized_index_view(request):
 #     template_name = 'service_portal/auth_index.html'
 
 
+@login_required
+def vehicle_view(request):
+    vehicles = Vehicle.objects.all()
+    return render(request, 'service_portal/vehicle_view.html', {'vehicles': vehicles})
+
+
+@login_required
+def service_view(request):
+    services = Service.objects.all()
+    return render(request, 'service_portal/service_view.html', {'services': services})
+
+
+@login_required
+def reclamation_view(request):
+    reclamations = Reclamation.objects.all()
+    return render(request, 'service_portal/reclamation_view.html', {'reclamations': reclamations})
+
+
 def directory_vehicle_model_view(request, pk):
     vehicle_models = DirectoryVehicleModel.objects.filter(pk=pk)
     return render(request, 'service_portal/DirectoryVehicleModel.html', {'vehicle_models': vehicle_models})

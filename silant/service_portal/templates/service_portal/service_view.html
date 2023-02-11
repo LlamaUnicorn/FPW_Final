@@ -1,0 +1,31 @@
+{% extends "layout/basic.html" %}
+{% block content %}
+<table id="services-table">
+  <thead>
+    <tr>
+      <th>service_type</th>
+      <th>from vehicle model</th>
+      <th>service_date</th>
+      <th>service_engine_hours</th>
+      <th>service_order_number</th>
+      <th>service_order_date</th>
+      <th>service_provider</th>
+      <th>service_vehicle</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for service in services %}
+      <tr>
+        <td>{{ service.service_type }}</td>
+        <td>{{ service.vehicle.vehicle_serial_number }} {{ service.vehicle.vehicle_model }}</td>
+        <td>{{ service.service_date }}</td>
+        <td>{{ service.service_engine_hours }}</td>
+        <td>{{ service.service_order_number }}</td>
+        <td>{{ service.service_order_date }}</td>
+        <td>{{ service.service_provider }}</td>
+        <td>{{ service.service_vehicle }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

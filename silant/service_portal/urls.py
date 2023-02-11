@@ -23,4 +23,8 @@ urlpatterns = [
     # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('logout/', views.logout_view, name='logout'),
     # path('auth_index/', AuthorizedIndexView.as_view(), name='auth_index')
+    path('service_view/', views.service_view, name='service_view'),
+    path('reclamation_view/', views.reclamation_view, name='reclamation_view'),
+    path('vehicle_view/', views.vehicle_view, name='vehicle_view'),
+
 ]
