@@ -11,7 +11,24 @@ header {
   }
 }
 
+/*body {*/
+/*  font-family: 'PT Astra', sans-serif;*/
+/*}*/
 
+@font-face {
+  font-family: "PT Astra Sans";
+  src: url("/static/service_portal/PT-Astra-Sans.ttf") format("truetype");
+}
+
+body {
+  font-family: "PT Astra Sans", sans-serif;
+}
+
+
+.logo {
+  width: 6vw;
+  height: auto;
+}
 /*header h1 {*/
 /*    width: 80%;*/
 /*    margin: 0 auto;*/

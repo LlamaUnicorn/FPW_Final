@@ -29,6 +29,17 @@
         <td>{{ reclamation.reclamation_service_provider }}</td>
       </tr>
     {% endfor %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#reclamation-table').DataTable({
+            "responsive": true,
+            scrollX: true,
+        });
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
   </tbody>
 </table>
 {% endblock %}

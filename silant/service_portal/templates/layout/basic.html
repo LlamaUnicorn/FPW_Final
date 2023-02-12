@@ -11,6 +11,7 @@
     <title>Электронная сервисная книжка "Мой Силант"{% block title %}Главная{% endblock %}</title>
     <link rel="stylesheet" type="text/css"
     href="{% static 'service_portal/style.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'service_portal/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
 </head>
@@ -22,6 +23,7 @@
 <!--        <button> <a href="/logout/">Выйти</a></button>-->
 <!--    </nav>-->
     <nav>
+        <img src="{% static 'service_portal/logo.svg' %}" alt="Logo" class="logo">
         {% block nav %}
         <button><a href="{% url 'index' %}">Главная</a></button>
         {% endblock %}
