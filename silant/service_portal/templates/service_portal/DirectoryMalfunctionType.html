@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Узел отказа</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for directory_malfunction_type in directory_malfunction_types %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ directory_malfunction_type.directory_malfunction_type }}</td>
+      <td>{{ directory_malfunction_type.directory_malfunction_type_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

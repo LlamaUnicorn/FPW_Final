@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Вид ТО</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for service_service_type in service_service_types %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ service_service_type.directory_service_type }}</td>
+      <td>{{ service_service_type.directory_service_type_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

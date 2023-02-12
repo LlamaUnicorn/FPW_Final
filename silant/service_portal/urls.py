@@ -26,5 +26,11 @@ urlpatterns = [
     path('service_view/', views.service_view, name='service_view'),
     path('reclamation_view/', views.reclamation_view, name='reclamation_view'),
     path('vehicle_view/', views.vehicle_view, name='vehicle_view'),
+    path('directory_reclamation_malfunction_type/<int:pk>', views.directory_reclamation_malfunction_type_view,
+         name='directory_reclamation_malfunction_type_view'),
+    path('directory_reclamation_repair_type/<int:pk>', views.directory_reclamation_repair_type_view,
+         name='directory_reclamation_repair_type_view'),
+    path('service_service_type/<int:pk>', directory_service_types_view,
+         name='directory_service_types_view'),
 
 ]

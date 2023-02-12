@@ -2,32 +2,30 @@
 <table id="reclamation-table">
   <thead>
     <tr>
-        <th>reclamation_date</th>
-        <th>from vehicle model serial</th>
-        <th>reclamation_engine_hours</th>
-        <th>reclamation_malfunction</th>
-        <th>reclamation_malfunction_description</th>
-        <th>reclamation_repair_type</th>
-        <th>reclamation_replacement_parts</th>
-        <th>reclamation_repair_date</th>
-        <th>reclamation_idle_time</th>
-        <th>reclamation_vehicle</th>
+        <th>Зав. № машины</th>
+        <th>Дата отказа</th>
+        <th>Наработка, м/час</th>
+        <th>Узел отказа</th>
+        <th>Описание отказа</th>
+        <th>Способ восстановления</th>
+        <th>Используемые части</th>
+        <th>Дата восстановления</th>
+        <th>Время простоя техники</th>
         <th>reclamation_service_provider</th>
     </tr>
   </thead>
   <tbody>
     {% for reclamation in reclamations %}
       <tr>
+        <td>{{ reclamation.reclamation_vehicle }}</td>
         <td>{{ reclamation.reclamation_date }}</td>
-        <td>{{ reclamation.vehicle.vehicle_serial_number }} {{ service.vehicle.vehicle_model }}</td>
         <td>{{ reclamation.reclamation_engine_hours }}</td>
-        <td>{{ reclamation.reclamation_malfunction }}</td>
+        <td><a href="{% url 'directory_reclamation_malfunction_type_view' reclamation.pk %}">{{ reclamation.reclamation_malfunction|truncatechars:12 }}</a></td>
         <td>{{ reclamation.reclamation_malfunction_description }}</td>
-        <td>{{ reclamation.reclamation_repair_type }}</td>
+        <td><a href="{% url 'directory_reclamation_repair_type_view' reclamation.pk %}">{{ reclamation.reclamation_repair_type|truncatechars:12 }}</a></td>
         <td>{{ reclamation.reclamation_replacement_parts }}</td>
         <td>{{ reclamation.reclamation_repair_date }}</td>
         <td>{{ reclamation.reclamation_idle_time }}</td>
-        <td>{{ reclamation.reclamation_vehicle }}</td>
         <td>{{ reclamation.reclamation_service_provider }}</td>
       </tr>
     {% endfor %}

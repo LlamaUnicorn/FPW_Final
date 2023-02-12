@@ -18,9 +18,9 @@ class ServiceAdmin(admin.ModelAdmin):
 
 
 class ReclamationAdmin(admin.ModelAdmin):
-    list_display = ('reclamation_date', 'reclamation_malfunction', 'reclamation_vehicle')
-    list_display_links = ('reclamation_date', 'reclamation_malfunction', 'reclamation_vehicle')
-    search_fields = ('reclamation_date', 'reclamation_malfunction', 'reclamation_vehicle')
+    list_display = ('reclamation_date', 'reclamation_malfunction')
+    list_display_links = ('reclamation_date', 'reclamation_malfunction')
+    search_fields = ('reclamation_date', 'reclamation_malfunction')
 
 
 admin.site.register(Vehicle, VehicleAdmin)

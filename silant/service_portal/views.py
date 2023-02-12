@@ -111,6 +111,24 @@ def directory_vehicle_service_provider_view(request, pk):
                   {'vehicle_service_providers': vehicle_service_providers})
 
 
+def directory_service_types_view(request, pk):
+    service_service_types = DirectoryServiceType.objects.filter(pk=pk)
+    return render(request, 'service_portal/DirectoryServiceTypes.html',
+                  {'service_service_types': service_service_types})
+
+
+def directory_reclamation_malfunction_type_view(request, pk):
+    directory_malfunction_types = DirectoryMalfunctionType.objects.filter(pk=pk)
+    return render(request, 'service_portal/DirectoryMalfunctionType.html',
+                  {'directory_malfunction_types': directory_malfunction_types})
+
+
+def directory_reclamation_repair_type_view(request, pk):
+    directory_reclamation_repair_types = DirectoryMalfunctionType.objects.filter(pk=pk)
+    return render(request, 'service_portal/DirectoryReclamationRepairType.html',
+                  {'directory_reclamation_repair_types': directory_reclamation_repair_types})
+
+
 class VehicleCreateView(CreateView):
     template_name = 'service_portal/create.html'
     form_class = VehicleFilterForm

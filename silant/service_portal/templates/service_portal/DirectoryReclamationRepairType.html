@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Способ восстановления</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for directory_reclamation_repair_type in directory_reclamation_repair_types %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ directory_reclamation_repair_type.directory_repair_type }}</td>
+      <td>{{ directory_reclamation_repair_type.directory_repair_type_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
