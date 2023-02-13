@@ -5,7 +5,7 @@
 {% block nav %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <button><a href="{% url 'auth_index' %}">Главная</a></button>
-<button><a href="{% url 'create' %}">Добавить запись</a></button>
+<button><a href="{% url 'create' %}">Добавить машину</a></button>
 {{request.user.username}}
 <button> <a href="/logout/">Выйти</a></button>
 {% endblock %}

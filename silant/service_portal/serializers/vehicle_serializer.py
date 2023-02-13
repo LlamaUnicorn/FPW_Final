@@ -5,7 +5,7 @@ from service_portal.models import Vehicle
 class VehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Vehicle
-        fields = ('vehicle_serial_number', 'vehicle_engine_serial_number', 'vehicle_transmission_serial_number')
+        fields = '__all__'
 
 
 class VehicleManagersSerializer(serializers.ModelSerializer):

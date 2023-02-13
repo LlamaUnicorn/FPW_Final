@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DetailView
+from django import forms
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
@@ -14,7 +15,7 @@ from service_portal.models import Vehicle
 from service_portal.serializers.vehicle_serializer import VehicleSerializer, VehicleManagersSerializer, VehicleServiceSerializer
 
 from .models import *
-from .forms import VehicleFilterForm
+from .forms import VehicleFilterForm, VehicleCreateForm
 from .filters import VehicleFilter
 
 
@@ -131,12 +132,22 @@ def directory_reclamation_repair_type_view(request, pk):
 
 class VehicleCreateView(CreateView):
     template_name = 'service_portal/create.html'
-    form_class = VehicleFilterForm
+    form_class = VehicleCreateForm
     success_url = reverse_lazy('auth_index')
 
     # def get_context_data(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
     #     pass
+
+
+class VehicleUpdateView(UpdateView):
+    template_name = 'service_portal/create.html'
+    form_class = VehicleCreateForm
+    success_url = reverse_lazy('auth_index')
+    model = Vehicle
+
+    def get_object(self, queryset=None):
+        return Vehicle.objects.get(pk=self.kwargs.get('pk'))
 
 
 class VehicleDetailView(generics.RetrieveAPIView):

@@ -32,5 +32,6 @@ urlpatterns = [
          name='directory_reclamation_repair_type_view'),
     path('service_service_type/<int:pk>', directory_service_types_view,
          name='directory_service_types_view'),
+    path('vehicle/<int:pk>/update', VehicleUpdateView.as_view(), name='update'),
 
 ]
