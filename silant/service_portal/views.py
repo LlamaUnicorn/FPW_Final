@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django import forms
-from django.views.generic import CreateView, ListView, DetailView, UpdateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
@@ -145,6 +145,15 @@ class VehicleUpdateView(UpdateView):
     form_class = VehicleCreateForm
     success_url = reverse_lazy('auth_index')
     model = Vehicle
+
+    def get_object(self, queryset=None):
+        return Vehicle.objects.get(pk=self.kwargs.get('pk'))
+
+
+class VehicleDeleteView(DeleteView):
+    template_name = 'service_portal/DeleteVehicle.html'
+    model = Vehicle
+    success_url = reverse_lazy('auth_index')
 
     def get_object(self, queryset=None):
         return Vehicle.objects.get(pk=self.kwargs.get('pk'))
