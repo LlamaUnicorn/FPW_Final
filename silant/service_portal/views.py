@@ -141,7 +141,7 @@ class VehicleCreateView(CreateView):
 
 
 class VehicleUpdateView(UpdateView):
-    template_name = 'service_portal/create.html'
+    template_name = 'service_portal/UpdateVehicle.html'
     form_class = VehicleCreateForm
     success_url = reverse_lazy('auth_index')
     model = Vehicle
