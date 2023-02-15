@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "datatables.net": "^1.13.2",
+    "datatables.net-dt": "^1.13.2"
+  }
+}

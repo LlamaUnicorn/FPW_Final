@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+<table>
+  <thead>
+      <tr>
+        <th>Модель двигателя</th>
+        <th>Описание</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for vehicle_engine_model in vehicle_engine_models %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+      <td>{{ vehicle_engine_model.directory_vehicle_engine_model }}</td>
+      <td>{{ vehicle_engine_model.directory_vehicle_engine_model_description }}</td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+

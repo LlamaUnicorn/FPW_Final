@@ -1,0 +1,149 @@
+{% extends "layout/basic.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block nav %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<button><a href="{% url 'auth_index' %}">Главная</a></button>
+<button><a href="{% url 'create' %}">Добавить машину</a></button>
+{{request.user.username}}
+<button> <a href="/logout/">Выйти</a></button>
+{% endblock %}
+{% block content %}
+<!--<h1>Таблица с данными</h1>-->
+<!--    <form method="get">-->
+<!--        {{ form.as_table }}-->
+<!--        <button type="submit" class="btn btn-secondary">Найти</button>-->
+<!--    </form>-->
+<!--<table id="vehicles-table" class="display" style="width:100%">-->
+<!--    <thead>-->
+<!--        <tr>-->
+<!--            <th>Зав. № машины</th>-->
+<!--            <th>Модель техники</th>-->
+<!--            <th>Модель двигателя</th>-->
+<!--            <th>Зав. № двигателя</th>-->
+<!--            <th>Модель трансмиссии</th>-->
+<!--            <th>Зав. № трансмиссии</th>-->
+<!--            <th>Модель ведущего моста</th>-->
+<!--            <th>Зав. № ведущего моста</th>-->
+<!--            <th>Модель управляемого моста</th>-->
+<!--            <th>Зав. № управляемого моста</th>-->
+<!--            <th>Договор поставки №, дата</th>-->
+<!--            <th>Дата отгрузки с завода</th>-->
+<!--            <th>Грузополучатель (конечный потребитель)</th>-->
+<!--            <th>Адрес поставки (эксплуатации)</th>-->
+<!--            <th>Комплектация (доп. опции)</th>-->
+<!--            <th>Клиент</th>-->
+<!--            <th>Сервисная компания</th>-->
+<!--        </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--        {% for vehicle in vehicles %}-->
+<!--        <tr class="{% cycle 'row1' 'row2' %}">-->
+<!--            <td>{{ vehicle.vehicle_serial_number }}</td>-->
+<!--            <td><a href="{% url 'directory_vehicle_model_view' vehicle.pk %}">{{ vehicle.vehicle_model|truncatechars:12 }}</a></td>-->
+<!--            <td><a href="{% url 'directory_vehicle_engine_model_view' vehicle.pk %}">{{ vehicle.vehicle_engine_model|truncatechars:12 }}</a></td>-->
+<!--            <td>{{ vehicle.vehicle_engine_serial_number }}</td>-->
+<!--            <td><a href="{% url 'directory_vehicle_transmission_model_view' vehicle.pk %}">{{ vehicle.vehicle_transmission_model|truncatechars:12 }}</a></td>-->
+<!--            <td>{{ vehicle.vehicle_transmission_serial_number }}</td>-->
+<!--            <td><a href="{% url 'directory_vehicle_live_axle_model_view' vehicle.pk %}">{{ vehicle.vehicle_live_axle_model|truncatechars:12 }}</a></td>-->
+<!--            <td>{{ vehicle.vehicle_live_axle_serial_number }}</td>-->
+<!--            <td><a href="{% url 'directory_vehicle_dead_axle_model_view' vehicle.pk %}">{{ vehicle.vehicle_dead_axle_model|truncatechars:12 }}</a></td>-->
+<!--            <td>{{ vehicle.vehicle_dead_axle_serial_number }}</td>-->
+<!--            <td>{{ vehicle.vehicle_invoice }}</td>-->
+<!--            <td>{{ vehicle.vehicle_shipping_date|date:"d.m.Y" }}</td>-->
+<!--            <td>{{ vehicle.vehicle_end_user }}</td>-->
+<!--            <td>{{ vehicle.vehicle_shipping_address }}</td>-->
+<!--            <td>{{ vehicle.vehicle_options }}</td>-->
+<!--            <td><a href="{% url 'directory_clients_model_view' vehicle.pk %}">{{ vehicle.vehicle_client|truncatechars:12 }}</a></td>-->
+<!--            <td><a href="{% url 'directory_vehicle_service_provider_view' vehicle.pk %}">{{ vehicle.vehicle_service_provider|truncatechars:12 }}</a></td>-->
+<!--        </tr>-->
+<!--        {% endfor %}-->
+<!--    </tbody>-->
+<!--</table>-->
+<style>
+
+</style>
+<div id="buttons">
+    <button id="view-1-btn">Общая инфо</button>
+    <button id="view-2-btn">ТО</button>
+    <button id="view-3-btn">Рекламации</button>
+</div>
+<div id="result"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $("#view-1-btn").click(function() {
+    $.get("{% url 'vehicle_view' %}", function(data) {
+      $("#result").html(data);
+    });
+  });
+
+  $("#view-2-btn").click(function() {
+    $.get("{% url 'service_view' %}", function(data) {
+      $("#result").html(data);
+    });
+  });
+
+  $("#view-3-btn").click(function() {
+    $.get("{% url 'reclamation_view' %}", function(data) {
+      $("#result").html(data);
+    });
+  });
+
+  // Load data for the first table (Vehicle) by default
+  $("#view-1-btn").click();
+});
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<!--<form method="get">-->
+<!--  <div class="input-group">-->
+<!--    {{ filter.form.vehicle_serial_number }}-->
+<!--    <button type="submit" class="btn btn-primary">Search</button>-->
+<!--  </div>-->
+<!--</form>-->
+{% endblock %}
+
+{% block scripts %}
+<!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--<script src="https://code.jquery.com/jquery-3.5.1.js"></script>-->
+<!--<script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>-->
+<!--<script>-->
+<!--$(document).ready( function() {-->
+<!--    $('#vehicles-table').DataTable({-->
+<!--        "responsive": true,-->
+<!--        scrollX: true,-->
+<!--        scrollY: 400-->
+<!--    });-->
+<!--});-->
+<!--</script>-->
+<!--<script>-->
+<!--$(document).ready(function() {-->
+<!--  $("#view-1-btn").click(function() {-->
+<!--    $.get("{% url 'auth_index' %}", function(data) {-->
+<!--      $("#result").html(data);-->
+<!--    });-->
+<!--  });-->
+
+<!--  $("#view-2-btn").click(function() {-->
+<!--    $.get("{% url 'service_view' %}", function(data) {-->
+<!--      $("#result").html(data);-->
+<!--    });-->
+<!--  });-->
+
+<!--  $("#view-3-btn").click(function() {-->
+<!--    $.get("{% url 'logout' %}", function(data) {-->
+<!--      $("#result").html(data);-->
+<!--    });-->
+<!--  });-->
+
+<!--  // Load data for the first table (Vehicle) by default-->
+<!--  $("#view-2-btn").click();-->
+<!--});-->
+<!--</script>-->
+{% endblock %}
+
+{% block styles %}
+<!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>-->
+{% endblock %}

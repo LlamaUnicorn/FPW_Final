@@ -1,0 +1,45 @@
+{% block content %}
+<table id="reclamation-table">
+  <thead>
+    <tr>
+        <th>Зав. № машины</th>
+        <th>Дата отказа</th>
+        <th>Наработка, м/час</th>
+        <th>Узел отказа</th>
+        <th>Описание отказа</th>
+        <th>Способ восстановления</th>
+        <th>Используемые части</th>
+        <th>Дата восстановления</th>
+        <th>Время простоя техники</th>
+        <th>reclamation_service_provider</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for reclamation in reclamations %}
+      <tr>
+        <td>{{ reclamation.reclamation_vehicle }}</td>
+        <td>{{ reclamation.reclamation_date }}</td>
+        <td>{{ reclamation.reclamation_engine_hours }}</td>
+        <td><a href="{% url 'directory_reclamation_malfunction_type_view' reclamation.pk %}">{{ reclamation.reclamation_malfunction|truncatechars:12 }}</a></td>
+        <td>{{ reclamation.reclamation_malfunction_description }}</td>
+        <td><a href="{% url 'directory_reclamation_repair_type_view' reclamation.pk %}">{{ reclamation.reclamation_repair_type|truncatechars:12 }}</a></td>
+        <td>{{ reclamation.reclamation_replacement_parts }}</td>
+        <td>{{ reclamation.reclamation_repair_date }}</td>
+        <td>{{ reclamation.reclamation_idle_time }}</td>
+        <td>{{ reclamation.reclamation_service_provider }}</td>
+      </tr>
+    {% endfor %}
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#reclamation-table').DataTable({
+            "responsive": true,
+            scrollX: true,
+        });
+    });
+    </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
+  </tbody>
+</table>
+{% endblock %}

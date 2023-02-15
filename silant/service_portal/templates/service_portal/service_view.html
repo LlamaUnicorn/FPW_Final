@@ -1,0 +1,39 @@
+{% block content %}
+<table id="services-table">
+  <thead>
+    <tr>
+      <th>Зав. № машины</th>
+      <th>Вид ТО</th>
+      <th>Дата проведения ТО</th>
+      <th>Наработка, м/час</th>
+      <th>№ заказ-наряда</th>
+      <th>Дата заказ-наряда</th>
+      <th>Организация, проводившая ТО</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for service in services %}
+      <tr>
+        <td>{{ service.service_vehicle }}</td>
+        <td><a href="{% url 'directory_service_types_view' service.pk %}">{{ service.service_type|truncatechars:12 }}</a></td>
+        <td>{{ service.service_date }}</td>
+        <td>{{ service.service_engine_hours }}</td>
+        <td>{{ service.service_order_number }}</td>
+        <td>{{ service.service_order_date }}</td>
+        <td>{{ service.service_provider }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $('#services-table').DataTable({
+                "responsive": true,
+                scrollX: true,
+            });
+        });
+        </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
+</table>
+{% endblock %}

@@ -1,0 +1,98 @@
+header {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    color: #D20A11;
+}
+
+@media (max-width: 767px) {
+  header {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/*body {*/
+/*  font-family: 'PT Astra', sans-serif;*/
+/*}*/
+table.dataTable tr:hover {
+    background-color: #f5f5f5;
+}
+
+table.dataTable td, table.dataTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table.dataTable tbody tr:nth-child(odd) {
+    background-color: #EBE6D6;
+}
+
+
+@font-face {
+  font-family: "PT Astra Sans";
+  src: url("/static/service_portal/PT-Astra-Sans.ttf") format("truetype");
+}
+
+body {
+  font-family: "PT Astra Sans", sans-serif;
+}
+
+
+.logo {
+    width: 6vw;
+    height: auto;
+    color: #163E6C;
+    color: #D20A11;
+    color: #EBE6D6;
+}
+/*header h1 {*/
+/*    width: 80%;*/
+/*    margin: 0 auto;*/
+/*    text-align: center;*/
+/*    color: red;*/
+/*}*/
+
+h1 {
+    text-align: center;
+    color: #163E6C;
+}
+
+th {
+    padding: 10px;
+}
+td {
+    border-bottom: 1px solid #eee;
+    padding: 10px;
+}
+
+
+.row1 {
+    color: black;
+    background-color: #163E6C;
+}
+
+.row2 {
+    color: black;
+    background-color: #D20A11;
+
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+/*button {*/
+/*    padding: 1px;*/
+/*}*/
+
+#buttons {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin: 0 2px;
+}

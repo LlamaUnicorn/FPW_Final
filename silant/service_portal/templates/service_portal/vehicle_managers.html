@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vehicles (Managers View)</title>
+</head>
+<body>
+  <h1>Vehicles (Managers View)</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Зав. № машины</th>
+        <th>Модель техники</th>
+        <th>Модель двигателя</th>
+        <th>Зав. № двигателя</th>
+        <th>Модель трансмиссии</th>
+        <th>Зав. № трансмиссии</th>
+        <th>Модель ведущего моста</th>
+        <th>Зав. № ведущего моста</th>
+        <th>Модель управляемого моста</th>
+        <th>Зав. № управляемого моста</th>
+        <th>Договор поставки №, дата</th>
+        <th>Дата отгрузки с завода</th>
+        <th>Грузополучатель (конечный потребитель)</th>
+        <th>Адрес поставки (эксплуатации)</th>
+        <th>Комплектация (доп. опции)</th>
+        <th>Клиент</th>
+        <th>Сервисная компания</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for vehicle in vehicles %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <td>{{ vehicle.vehicle_serial_number }}</td>
+                <td><a href="{% url 'directory_vehicle_model_view' vehicle.pk %}">{{ vehicle.vehicle_model|truncatechars:12 }}</a></td>
+                <td><a href="{% url 'directory_vehicle_engine_model_view' vehicle.pk %}">{{ vehicle.vehicle_engine_model|truncatechars:12 }}</a></td>
+                <td>{{ vehicle.vehicle_engine_serial_number }}</td>
+                <td><a href="{% url 'directory_vehicle_transmission_model_view' vehicle.pk %}">{{ vehicle.vehicle_transmission_model|truncatechars:12 }}</a></td>
+                <td>{{ vehicle.vehicle_transmission_serial_number }}</td>
+                <td><a href="{% url 'directory_vehicle_live_axle_model_view' vehicle.pk %}">{{ vehicle.vehicle_live_axle_model|truncatechars:12 }}</a></td>
+                <td>{{ vehicle.vehicle_live_axle_serial_number }}</td>
+                <td><a href="{% url 'directory_vehicle_dead_axle_model_view' vehicle.pk %}">{{ vehicle.vehicle_dead_axle_model|truncatechars:12 }}</a></td>
+                <td>{{ vehicle.vehicle_dead_axle_serial_number }}</td>
+                <td>{{ vehicle.vehicle_invoice }}</td>
+                <td>{{ vehicle.vehicle_shipping_date|date:"d.m.Y" }}</td>
+                <td>{{ vehicle.vehicle_end_user }}</td>
+                <td>{{ vehicle.vehicle_shipping_address }}</td>
+                <td>{{ vehicle.vehicle_options }}</td>
+                <td><a href="{% url 'directory_clients_model_view' vehicle.pk %}">{{ vehicle.vehicle_client|truncatechars:12 }}</a></td>
+                <td><a href="{% url 'directory_vehicle_service_provider_view' vehicle.pk %}">{{ vehicle.vehicle_service_provider|truncatechars:12 }}</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
