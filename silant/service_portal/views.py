@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django import forms
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from rest_framework import generics
@@ -7,23 +6,14 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
 
 from service_portal.permissions import IsManagerUser, IsServiceUser
-from service_portal.models import Vehicle
 from service_portal.serializers.vehicle_serializer import VehicleSerializer, VehicleManagersSerializer, VehicleServiceSerializer
 
 from .models import *
 from .forms import VehicleFilterForm, VehicleCreateForm
-from .filters import VehicleFilter
 
 
-# def index(request):
-#     vehicles = Vehicle.objects.all
-#     return render(request, 'service_portal/index.html', {'vehicles': vehicles})
-
-# @login_required
 def index(request):
     form = VehicleFilterForm(request.GET)
     vehicles = Vehicle.objects.all()
@@ -43,9 +33,6 @@ def authorized_index_view(request):
         if vehicle_serial_number:
             vehicles = vehicles.filter(vehicle_serial_number__icontains=vehicle_serial_number)
     return render(request, 'service_portal/auth_index.html', {'vehicles': vehicles, 'form': form})
-
-# class AuthorizedIndexView(LoginRequiredMixin, TemplateView):
-#     template_name = 'service_portal/auth_index.html'
 
 
 @login_required
@@ -69,11 +56,6 @@ def reclamation_view(request):
 def directory_vehicle_model_view(request, pk):
     vehicle_models = DirectoryVehicleModel.objects.filter(pk=pk)
     return render(request, 'service_portal/DirectoryVehicleModel.html', {'vehicle_models': vehicle_models})
-
-
-# def directory_vehicle_model_view(request):
-#     vehicle_models = DirectoryVehicleModel.objects.all
-#     return render(request, 'service_portal/DirectoryVehicleModel.html', {'vehicle_models': vehicle_models})
 
 
 def directory_vehicle_engine_model_view(request, pk):
@@ -135,10 +117,6 @@ class VehicleCreateView(CreateView):
     form_class = VehicleCreateForm
     success_url = reverse_lazy('auth_index')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     pass
-
 
 class VehicleUpdateView(UpdateView):
     template_name = 'service_portal/UpdateVehicle.html'
@@ -191,36 +169,3 @@ class VehicleServiceView(generics.RetrieveUpdateDestroyAPIView):
 def logout_view(request):
     logout(request)
     return redirect('login')
-# class VehicleList(ListView):
-#     model = Vehicle
-#     ordering = 'vehicle_shipping_date'
-#     template_name = 'index.html'
-#     context_object_name = 'vehicles'
-#
-#     def get_queryset(self):
-#         queryset = super.get_queryset()
-#         self.filterset = VehicleFilter(self.request.GET, queryset)
-#         return self.filterset.qs
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['filterset'] = self.filterset
-#         return context
-#
-#
-# class VehicleDetail(DetailView):
-#     model = Vehicle
-#     template_name = 'index.html'
-#     context_object_name = 'vehicle'
-
-# def vehicle_list(request):
-#     form = VehicleFilterForm(request.GET)
-#     if form.is_valid():
-#         vehicle_serial_number = form.cleaned_data['vehicle_serial_number']
-#         if vehicle_serial_number:
-#             vehicles = Vehicle.objects.filter(vehicle_serial_number__exact=vehicle_serial_number)
-#         else:
-#             vehicles = Vehicle.objects.all()
-#     else:
-#         vehicles = Vehicle.objects.all()
-#     return render(request, 'vehicle_list.html', {'vehicles': vehicles, 'form': form})
