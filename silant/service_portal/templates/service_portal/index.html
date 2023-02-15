@@ -45,7 +45,8 @@
     </thead>
     <tbody>
         {% for vehicle in vehicles %}
-        <tr class="{% cycle 'row1' 'row2' %}">
+<!--        <tr class="{% cycle 'row1' 'row2' %}">-->
+        <tr>
             <td>{{ vehicle.vehicle_serial_number }}</td>
             <td><a href="{% url 'directory_vehicle_model_view' vehicle.pk %}">{{ vehicle.vehicle_model|truncatechars:12 }}</a></td>
             <td><a href="{% url 'directory_vehicle_engine_model_view' vehicle.pk %}">{{ vehicle.vehicle_engine_model|truncatechars:12 }}</a></td>
@@ -67,9 +68,6 @@
         {% endfor %}
     </tbody>
 </table>
-{% endblock %}
-
-{% block scripts %}
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
 <script>
@@ -77,10 +75,13 @@ $(document).ready( function() {
     $('#vehicles-table').DataTable({
         "responsive": true,
         scrollX: true,
-        scrollY: 400
     });
 });
 </script>
+{% endblock %}
+
+{% block scripts %}
+
 
 {% endblock %}
 

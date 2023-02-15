@@ -1,7 +1,8 @@
 header {
-  width: 80%;
-  margin: 0 auto;
-  text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    color: #D20A11;
 }
 
 @media (max-width: 767px) {
@@ -10,6 +11,7 @@ header {
     text-align: center;
   }
 }
+
 
 /*body {*/
 /*  font-family: 'PT Astra', sans-serif;*/
@@ -26,8 +28,11 @@ body {
 
 
 .logo {
-  width: 6vw;
-  height: auto;
+    width: 6vw;
+    height: auto;
+    color: #163E6C;
+    color: #D20A11;
+    color: #EBE6D6;
 }
 /*header h1 {*/
 /*    width: 80%;*/
@@ -38,6 +43,7 @@ body {
 
 h1 {
     text-align: center;
+    color: #163E6C;
 }
 
 th {
@@ -51,12 +57,12 @@ td {
 
 .row1 {
     color: black;
-    background-color: darkgray;
+    background-color: #163E6C;
 }
 
 .row2 {
-    color: darkblue;
-    background-color: lightgray;
+    color: black;
+    background-color: #D20A11;
 
 }
 
